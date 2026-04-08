@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API for the MAN authentication endpoint
-  version: 1.0.0
+  version: 1.0.2
   license:
     name: CC-BY-SA-4.0
     url: https://creativecommons.org/licenses/by-sa/4.0/legalcode
@@ -193,6 +193,7 @@ paths:
                     description: The lifetime in seconds of the access token.
                   not-before-policy:
                     type: integer
+                    format: int64  # This line is not present in the original APNF API document; it is present to enable us to parse this value as a 64-bit integer.
                     description: All tokens issued before this timestamp become invalid. The default value is 0. Only a platform malfunction may generate the change of this value.
                   refresh_expires_in:
                     type: integer
@@ -232,7 +233,7 @@ paths:
             application/json:
               schema:
                 # Differs from the original APNF API document (but not in function).
-                # See comment in components -> schemas container. 
+                # See comment in components -> schemas container.
                 $ref: '#/components/schemas/ErrorBadRequest'
               example:
                 error: invalid_client
@@ -250,7 +251,7 @@ paths:
             application/json:
               schema:
                 # Differs from the original APNF API document (but not in function).
-                # See comment in components -> schemas container. 
+                # See comment in components -> schemas container.
                 $ref: '#/components/schemas/ErrorUnauthorized'
               example:
                 error: invalid_request
@@ -268,7 +269,7 @@ paths:
             application/json:
               schema:
                 # Differs from the original APNF API document (but not in function).
-                # See comment in components -> schemas container. 
+                # See comment in components -> schemas container.
                 $ref: '#/components/schemas/ErrorForbidden'
               example:
                 error: access_denied
